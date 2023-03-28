@@ -2,10 +2,13 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
     :href="link"
   >
     <q-item-section
+    clickable
+    tag="a"
+    :href="link"
+
       v-if="icon"
       avatar
     >
