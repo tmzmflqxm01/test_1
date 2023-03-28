@@ -51,10 +51,21 @@
   <q-card-section v-else-if="type === 'C'"> C </q-card-section>
   <q-card-section v-else> Not A/B/C </q-card-section>
   <q-separator />
+
+
+  <div class="q-pa-md row items-start">
+  <q-btn @click="increment" label="카운트" color="primary"></q-btn>
+  <q-card-section>methodCount is: {{ methodCount }}</q-card-section>
+</div>
+<q-separator />
+
+
 </template>
 
 <script>
+import { date } from 'quasar'
 export default {
+
   title:"Vue Basic",
   name:"VueEx",
   components:{},
@@ -77,6 +88,7 @@ export default {
         seen: true,
 	      awesome: true,
 	      type: "B",
+        methodCount: 1
     }
   },
   computed:{
@@ -85,17 +97,32 @@ export default {
   watch:{
 
   },
-  mounted(){
+ // `mounted`는 나중에 설명할 생명 주기 훅입니다.
 
-  },
   methods:{
     calculateDate() {
       const timeStamp = Date.now();
       const formattedString = date.formatDate(timeStamp, "YYYY-MM-DD HH:mm");
       return formattedString;
 		},
-  }
 
+    increment(){
+      this.methodCount++
+    },
+
+    mutateDeeply() {
+      // 변경 사항이 감지됩니다.
+      this.obj.nested.count++
+      this.obj.arr.push('baz')},
+  },
+  mounted() {
+    // `this`는 컴포넌트 인스턴스를 나타냅니다.
+    console.log(this.methodCount) // => 1
+    // 값을 변경할 수 있습니다.
+    this.methodCount= 2
+    console.log(this.methodCount) // => 2
+    this.increment()
+  },
 }
 </script>
 
